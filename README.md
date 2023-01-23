@@ -74,3 +74,28 @@ If the request was returned as 'CREATED' the request was OK.
 To see the message consumed by the consumer, you can open the Kafdrop, click in the str-topic, see messages, and you will see the messages in the topics:
 
 [![kafdrop_with_message](https://github.com/joaolevi/Apache_Kafka/blob/main/images/kafkadrop-with-message.png?raw=true "kafdrop_with_message")](https://github.com/joaolevi/Apache_Kafka/blob/main/images/kafkadrop-with-message.png?raw=true "kafdrop_with_message")
+
+#### Consuming the Message
+As the message in Kafdrop was saved, the consumer can take the massage from there if it knows which **topic, partition and offset** the message is in. As we created just 2 partitions in KafkaAdminConfig.java (.partitions(**2**)) as we can see in the code below, the message can be save in the partition 0 or 1, depending on the Kafka system or if you set it. 
+
+```
+    @Bean
+    public KafkaAdmin.NewTopics topics() {
+        return new KafkaAdmin.NewTopics(
+                TopicBuilder.name("str-topic").partitions(2).replicas(1).build()
+        );
+    }
+```
+
+To see the message being consumed by the Consumer, we can send another message:
+
+```
+{
+    "message":"Apache Kafka repository"
+}
+```
+Taking a look on the terminal where the Consumer is running, we can see the message be consumed
+
+[![](https://github.com/joaolevi/Apache_Kafka/blob/main/images/consumindo_msg.png?raw=true)](https://github.com/joaolevi/Apache_Kafka/blob/main/images/consumindo_msg.png?raw=true)
+
+
