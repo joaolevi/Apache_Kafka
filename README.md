@@ -98,4 +98,46 @@ Taking a look on the terminal where the Consumer is running, we can see the mess
 
 [![](https://github.com/joaolevi/Apache_Kafka/blob/main/images/consumindo_msg.png?raw=true)](https://github.com/joaolevi/Apache_Kafka/blob/main/images/consumindo_msg.png?raw=true)
 
+-----------------------------------------------
 
+## The Payment-Service Project
+
+This project is very similar with the Producer and Consumer project. The difference is in the JSON message. Here, I prepared the software to receive a complete JSON object.
+
+The main objective is to manage more than one informations received by requests and to create a Collection on Postman.
+
+#### JSON Object
+
+The body to be sent in the request needs to have the fields:
+
+- id
+- idUser
+- idProduct
+- cardNumber
+
+Now, the request must be like this:
+
+```
+{
+    "id":111,
+    "idUser":22222,
+    "idProduct":3,
+    "cardNumber":"4444 5555 6666 7777 8888"
+}
+```
+
+The request must use another endpoint: `/payments`
+
+So, the complete URL will be: `localhost:19000/payments`
+
+#### Receiving the Payment
+
+If the payment was sent (request), the consumer from the payment-service software should confirm if the data (JSON Body) is correct and validate the payment.
+
+[![](https://github.com/joaolevi/Apache_Kafka/blob/main/images/payment-recived-terminal.png?raw=true)](https://github.com/joaolevi/Apache_Kafka/blob/main/images/payment-recived-terminal.png?raw=true)
+
+#### Kafdrop saving payments request
+
+Now, we can see the requests done in the payment-topic on Kafdrop in the `localhost:19000`. The last one was saved on the Partition 0 and offset 2
+
+[![](https://github.com/joaolevi/Apache_Kafka/blob/main/images/kafka_received_payments.png?raw=true)](https://github.com/joaolevi/Apache_Kafka/blob/main/images/kafka_received_payments.png?raw=true)
